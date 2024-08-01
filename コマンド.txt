@@ -1,0 +1,2 @@
+学習
+python train.py --config yolact_base_config --save_folder=weights/ --batch_size 6 --validation_size 25 --validation_epoch 10

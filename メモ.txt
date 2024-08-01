@@ -1,0 +1,62 @@
+変更点
+###"C:\Users\taich\anaconda3\envs\test\Lib\site-packages\torch\utils\data\sampler.py"の
+generator = torch.Generator()　----->   generator = torch.Generator(device='cuda')
+
+
+
+###yolact/utils/augmentations.pyの
+def __init__(self):
+        self.sample_options = (
+            # using entire original input image
+            None,
+            # sample a patch s.t. MIN jaccard w/ obj in .1,.3,.4,.7,.9
+            (0.1, None),
+            (0.3, None),
+            (0.7, None),
+            (0.9, None),
+            # randomly sample a patch
+            (None, None),
+        )
+
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　 　  V
+
+
+def __init__(self):
+        self.sample_options = np.array(
+            [
+            # using entire original input image
+            None,
+            # sample a patch s.t. MIN jaccard w/ obj in .1,.3,.4,.7,.9
+            (0.1, None),
+            (0.3, None),
+            (0.7, None),
+            (0.9, None),
+            # randomly sample a patch
+            (None, None),
+            ],
+            dtype=object
+        )
+
+
+###yolact/train.pyの
+data_loader = data.DataLoader(dataset, args.batch_size,
+                                  num_workers=args.num_workers,
+                                  shuffle=True, collate_fn=detection_collate,
+                                  pin_memory=True)
+
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　　　｜|
+　　　　　　 　  V
+
+data_loader = data.DataLoader(dataset, args.batch_size,
+                                  num_workers=args.num_workers,
+                                  shuffle=False, collate_fn=detection_collate,
+                                  pin_memory=True)
